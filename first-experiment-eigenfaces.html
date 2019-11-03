@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>First Experiment with Eigenfaces</title>
+<style>
+ul {list-style:none;}
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+</br></br>
+<h3><a href="first-experiment-eigenfaces.html">First Experiment with Eigenfaces</a></h3>
+<p size:11px><b>
+<a href="home.html">Archie S.</a> - 
+<time datetime="2018-03-10" pubdate>March 10, 2018 1:52 pm</time></b></p>
+<p size:12px>
+<p>
+To begin this experiment, I downloaded an open-source Python implementation of the eigenface algorithm. I intend to program it myself later on, however I thought it would be ideal to see how a working implementation functions. The implementation I downloaded was from Aleksandar Gyorev under the MIT license. It came packaged with the famous AT&amp;T database. This database contains ten images each of 40 people and was compiled from April 1992 to April 1994 at AT&amp;T Laboratories Cambridge. As a result, the quality isn&#8217;t the greatest. Each image is a 92&#215;112 pixel grayscale, so really small. To begin, I had a completely willing subject offer up a tribute of five pictures of their face while making different expressions:
+</p>
+<p><img src="yunive1.jpg"/><img src="yunive2.jpg"/><img src="yunive3.jpg"/><img src="yunive4.jpg"/><img src="yunive5.jpg"/></p>
+<p>
+With eigenfaces, the size of the test images must be equal to the size of the training images. Along with this, the faces must be centered. This means the eyes and mouths reside on the same line, and the face is in the center of the image. After some tinkering in Photoshop, here&#8217;s what I got:
+<p><img src="1.jpg"/><img src="2.jpg"/><img src="3.jpg"/><img src="4.jpg"/><img src="5.jpg"/></p>
+<p>
+It was only after this that I realized the database was from the 90s so all 40 subjects were Caucasian males. As you can imagine, this would be a problem for accurate identification. However, not all was lost. The purpose for this experiment was to gauge whether the program would be consistent in its identification (even if it was a man). And it was&#8230;kind of&#8230;not really&#8230;but kind of. Here&#8217;s the five faces that best correspond to her faces respectively:
+</p>
+<p><img src="one.png"/><img src="two.png"/><img src="three.png"/><img src="four.png"/><img src="one.png"/></p>
+<p>
+As you can see, the first and fifth faces were matched to the same face. Additionally, the program spits out the 5 best matches, so I then studied the interlap between them. Here&#8217;s a table summarizing the data:
+</p>
+<table>
+<tbody>
+<tr>
+<td width="130"></td>
+<td width="130">Face 1</td>
+<td width="130">Face 2</td>
+<td width="130">Face 3</td>
+<td width="130">Face 4</td>
+<td width="130">Face 5</td>
+</tr>
+<tr>
+<td width="130">1<sup>st</sup> Match</td>
+<td width="130"><strong>139</strong></td>
+<td width="130"><strong>213</strong></td>
+<td width="130">52</td>
+<td width="130">172</td>
+<td width="130"><strong>139</strong></td>
+</tr>
+<tr>
+<td width="130">2<sup>nd</sup> Match</td>
+<td width="130"><strong>213</strong></td>
+<td width="130">37</td>
+<td width="130">120</td>
+<td width="130"><strong>139</strong></td>
+<td width="130"><strong>141</strong></td>
+</tr>
+<tr>
+<td width="130">3<sup>rd</sup> Match</td>
+<td width="130"><strong>114</strong></td>
+<td width="130">36</td>
+<td width="130">125</td>
+<td width="130"><strong>193</strong></td>
+<td width="130">118</td>
+</tr>
+<tr>
+<td width="130">4<sup>th</sup> Match</td>
+<td width="130">211</td>
+<td width="130">38</td>
+<td width="130">124</td>
+<td width="130"><strong>141</strong></td>
+<td width="130"><strong>193</strong></td>
+</tr>
+<tr>
+<td width="130">5<sup>th</sup> Match</td>
+<td width="130"><strong>141</strong></td>
+<td width="130">41</td>
+<td width="130">122</td>
+<td width="130"><strong>114</strong></td>
+<td width="130"><strong>114</strong></td>
+</tr>
+</tbody>
+</table>
+<p>
+The numbers indicate the ID of the face within the AT&amp;T database. Bolded numbers indicate the face appeared more than once when reviewing the data. By comparing best matches and number of occurrences, I compiled the 5 best overall matches to her face in descending order:
+</p>
+<p><img src="one.png"/><img src="second.png"/><img src="third.png"/><img src="two.png"/><img src="fourth.png"/></p>
+<p>
+Intriguingly, the first and second best matches were of the same subject within the database. This indicates that to an extent, the eigenface algorithm was consistent. However, as of the moment, it leaves much to be desired. These inaccuracies resulted from the small size of the training set, low quality of it, and lack of diversity. These shortcomings don&#8217;t hamper the purpose of this experiment as this was just a preliminary test. In the future, I will use a more modern, robust database and repeat my experiment.
+</p>
+</p>
+<ul><header><h2>Comments:</h2></header>
+<li><img src="mystery-man.jpg" width="40" height="40"/>
+Jung Mee Park</br>
+The facial recognition examples are awesome!</br>
+March 14, 2018 at 2:19 pm
+</li>
+</ul>
+</body>
+</html>

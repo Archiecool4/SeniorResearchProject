@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Plans for Graphical User Interface</title>
+<style>
+ul {list-style:none;}
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+</br></br>
+<h3><a href="planning-a-questionnaire-for-emotion-evocation.html">Plans for Graphical User Interface</a></h3>
+<p size:11px><b>
+<a href="home.html">Archie S.</a> - 
+<time datetime="2018-05-14" pubdate>May 14, 2018 12:56 pm</time></b></p>
+<p size:12px>
+<p>
+<p>I talked with Mr. Kotalik this weekend to discuss the graphical user interface, or GUI, I&#8217;ll be using for people to interact with my program. He first showed me many examples of online web applications to demonstrate how companies design their apps to be easy-to-use. In essence, the lesson was to place the part of the app that will be used the most in clear view. The more advanced options should be hidden in menus so as not to overwhelm users. Additionally, he suggested I use the same standard icons as most companies use (such as the gear for settings). He told me this because in his experience, products that try to go against the tide in that way are confusing and do not catch on as well. Here is an example of a GUI:
+</p>
+<p><img src="gui.jpg"/></p>
+<p>
+The way I envision the home screen for my program is to have a left menu, middle pane that contains the webcam footage, and a right pane that has the controls for operating the camera. The right pane will allow the ability to switch between an Interview and Detection mode. The Interview mode has text boxes to allow the inputting of patients&#8217; names and will have the option to record and capture frames in a certain section, then mark it as a certain emotion. The Detection mode will simply have a Detect button that will allow the program to first compare the face to faces already in the system, and if the accuracy passes a certain threshold, perform emotion detection on it and store this data. Other screens will take up both middle and right panes.
+</p>
+<p><span style="text-decoration: underline">Left Menu</span>:</p>
+<p>
+Has options for Home (screen with camera), Patient Data (allows access to each patient&#8217;s individual file), Dashboard (contains an overall analysis of all patients in the database), Help (which will provide a basic overview of how to use the program). and About (which will contain information about who created the software).
+</p>
+<p><span style="text-decoration: underline">Patient Data</span>:</p>
+<p>
+Allows the user to select a patient name from a drop down list and view their emotion data, along with the data the data comes from. It also allows the user to edit this data.
+</p>
+<p><span style="text-decoration: underline">Dashboard</span>:</p>
+<p>
+Shows some graphics that demonstrate how all the patients are feeling (such as a pie chart). It also allows the user to mark certain days with events, such as a music event. In the future, if the same event comes up and is inputted, the program will be able to pull up previous data for the user to decide whether there is a trend in how patients react to these events, e.g. They are happier when music is played.
+</p>
+<p><span style="text-decoration: underline">Help</span>:</p>
+<p>
+Contains instructions on how to operate the program and a link to the support website.
+</p>
+<p><span style="text-decoration: underline">About</span>:</p>
+<p>
+Has a company logo and short text describing the program.
+</p>
+<p>
+I believe this layout will allow easy use of this program for people without technical backgrounds. I intend to use TKinter, Python&#8217;s standard GUI kit, to create a prototype of this program. If TKinter proves too difficult or not efficient enough, I am considering using Java for the GUI (as Java has a great built-in graphics library) and integrating the two with Jython.
+</p>
+</p>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Hammering out the Basics</title>
+<style>
+ul {list-style:none;}
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+</br></br>
+<h3><a href="hammering-out-the-basics.html">Hammering out the Basics</a></h3>
+<p size:11px><b>
+<a href="home.html">Archie S.</a> - 
+<time datetime="2018-02-13" pubdate>February 13, 2018 5:14 pm</time></b></p>
+<p size:12px>
+<p>
+Yesterday, I met with Mr Kotalik, my SRP mentor. We discussed the possible routes we could approach the problem and decided to employ the Agile methodology of software development, where one first creates user stories before writing any code. Here is our user story:
+</p>
+<p><em>
+A patient in a nursing home wakes up and after getting ready, leaves their room for breakfast in the dining hall. They proceed down the hallway where there is an off-the-shelf camera (so as not to place a camera in their private room) that scans their face. The automated system, which runs on a consumer computer, detects the patient has an expression indicative of depression. The system alerts a staff member who then further investigates in person.
+</em></p>
+<p>
+This user story allows us to get an idea of what we want before investing resources in development. In order for such a system to be successful, it will require training as all neural networks do. As of now, we have two possible approaches. One is to train the neural network on a large database of different expressions, and apply this data to patients. The downside to this approach is the difficulty in acquiring (it is necessary to request access from the institution that holds the database) and sorting (using eigenfaces) on the data. The other approach is to tailor the system to each individual patient. In this approach, we envisage the patient conducting a short interview that is filmed. Using a specially designed questionnaire to elicit emotional responses, the patient&#8217;s expressions can be recorded via computer vision and then inputted for training. The downside of this approach is the fact an interview needs to be conducted (perhaps multiple times to acquire enough data), and that training (which will likely require the use of cloud computing services) could be cost-prohibitive.
+</p>
+<p>
+Due to the nature of the Agile method, it is quite possible an eigenface-based system could turn out to be impractical, which would then require the use of another system (perhaps conventional image recognition). As of now, the type of neural network I intend to use is a restricted Boltzmann machine (RBM). However, convolutional neural networks (CNN) are better suited for conventional image recognition so should an eigenface-based system be ruled out, a CNN could be constructed.
+</p>
+<p>
+I am also installing a virtual machine on my laptop in order to prepare for programming. I am installing Nvidia&#8217;s CUDA (a parallel computing platform), Nvidia&#8217;s cuDNN (a library for GPU computing), TensorFlow for Python (Google&#8217;s open-source machine learning library that allows the use of pre-built networks), and OpenCV (an open-source computer vision library originally developed by Intel) on Ubuntu 14.04 (running on Oracle&#8217;s VirtualBox). The specs of my machine are as follows:
+</p>
+<p>CPU: i7-6700HQ; GPU: Nvidia GeForce GTX 960M; RAM: 16Gb DDR4 2133MHz</p>
+<p>
+While great for gaming, my laptop will only be able to train small neural networks (due to the ludicrous number of calculations necessary) for testing purposes. As a result, I intend to rent cloud computing space from Paperspace (which I have used in the past) as they offer Nvidia Quadro and even Tesla GPUs for machine learning.
+</p>
+<p>
+As of now, this is my game plan.
+</p>
+</p>
+<ul><header><h2>Comments:</h2></header>
+<li><img src="mystery-man.jpg" width="40" height="40"/>
+Jung Mee Park</br>
+Cool. It would be nice if you could use some of those supercomputers at the UA.</br>
+February 14, 2018 at 9:20 am
+<ul></br><li><img src="archie2.jpg" width="40" height="40"/>
+Archie</br>
+I was thinking about writing to them. It would reduce costs since renting out cloud computing space can really rack up (it cost me about $40 for a few days of training for my last project).</br>
+February 17, 2018 at 12:13 am
+</li></ul></br>
+<li><img src="mystery-man.jpg" width="40" height="40"/>
+Anthony Marinaccio</br>
+Reading about "the other approach", I was reminded of the Voight-Kampff Empathy test. I'm interested to see how this project develops.</br>
+February 15, 2018 at 1:08 pm
+<ul></br><li><img src="archie2.jpg" width="40" height="40"/>
+Archie</br>
+A specially designed questionnaire is what I'm going for (not for determining androids vs. humans though). It'll be interesting to research the psychology behind what elicits certain emotions.</br>
+February 17, 2018 at 12:15 am
+</li></ul>
+</ul>
+</body>
+</html>

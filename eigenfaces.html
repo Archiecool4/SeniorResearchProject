@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Eigenfaces</title>
+<style>
+ul {list-style:none;}
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+</br></br>
+<h3><a href="eigenfaces.html">Eigenfaces</a></h3>
+<p size:11px><b>
+<a href="home.html">Archie S.</a> - 
+<time datetime="2018-03-10" pubdate>March 10, 2018 6:00 am</time></b></p>
+<p size:12px>
+<p>
+In this post, I attempt to explain the premise of eigenfaces. In essence, it is a dimensionality-reduction technique. It&#8217;s not the most elegant solution to the problem of face recognition, but its crudeness allows for a relatively simple and fast implementation. If you&#8217;d like to know more, I highly suggest Matthew Turk and Alex Pentland&#8217;s seminal 1991 paper on the matter, <em>Eigenfaces for Recognition</em> (it&#8217;s how I learned about eigenfaces).
+</p>
+<p>
+What sets eigenfaces apart is the fact they do not actually look for any specific features. This is where <strong>principal component analysis</strong> (PCA) comes into play. The goal of PCA is to find &#8220;principal components&#8221; of a dataset that represent all or most of the variation in said dataset. In our case, eigenfaces would be the principal components of the set of faces. In other words, anything (and I mean anything) could make the face look different than another face, and the eigenface algorithm looks for this &#8211; the greatest sources of variation &#8211; rather than defined features such as eyes and noses. The downside? Well we have absolutely no idea what the computer learns to be a certain face, as it does this in an <strong>unsupervised</strong> fashion, so it&#8217;s possible for the algorithm to focus on features that are not the face (such as the background) if the dataset is not preprocessed sufficiently to remove &#8220;impurities.&#8221;
+</p>
+<p>
+Imagine we have an image of a face of <img src="emage001.png"/> pixels. Such an image is two-dimensional &#8211; meaning we can represent it as a 2D vector (<img src="emage001.png"/> array in our case). Each of the values in this array corresponds to a pixel in the image, specifically we could write its intensity. The problem is that dealing with multi-dimensional vectors in pattern recognition leads to a lot of problems, including the difficulty of computations. It&#8217;s better to represent this image as a vector of dimensions <img src="emage003.png"/> (one-dimensional). This has the consequence of each image effectively becomes a point in <img src="emage094.png"/> dimensional space &#8211; we&#8217;ll call this the <strong>face space</strong> because each point in the space is a face. This concept is a bit confusing so let me illustrate with an example. Say we have a very small image: 2&#215;2 pixels. We can write this as a 4&#215;1 vector. How many coordinates do you need to represent a point in 4-dimensional space? 4. How many values are in the 4&#215;1 vector we made out of the image? 4. In this way, each 2&#215;2 image becomes a set of coordinates, a.k.a. a point, in 4-dimensional space. Now the basics of the dimensionality-reduction I mentioned earlier should make more sense.
+</p>
+<p>
+Now how do we actually calculate eigenfaces? Say we have a set of training images: <img src="emage005.png"/> is the <em>i</em>th image in the set and <img src="emage043.png"/> is the number of images in the set. The first step is to represent these as 1D vectors as we discussed previously, say under the notation <img src="emage009.png"/>. The next step is to calculate the average, or mean, face. This just amounts to adding all the face vectors up, and dividing by the number of faces:
+</p>
+<p><img src="emage011.png"/></p>
+<p>
+Now that we have a mean face, we need to determine how much each face differs from it. As you&#8217;ve probably guessed, it&#8217;s just: <img src="emage013.png"/>. Now the next step is a bit tricky. We&#8217;re actually going to find our principal components. The way this is done is through finding the <strong>eigenvectors</strong> of the dataset&#8217;s <strong>covariance matrix</strong>. That&#8217;s a mouthful. The concept of eigenvectors is actually pretty simple. It just means if you multiply a matrix <strong>A</strong> by the eigenvector <em>v</em>, the result will be a scalar multiple of <em>v </em>(<strong>A</strong><em>v</em>=<em>c</em><em>v</em>). This scalar multiple <em>c</em> is known as an <strong>eigenvalue</strong>. Consequently, <em>c</em> and <em>v</em> are eigenvalues and eigenvectors of the matrix <strong>A</strong> respectively. By the way, &#8220;eigen&#8221; in German means &#8220;own,&#8221; which gives hint as an eigenvector times a matrix is itself times a value. A covariance matrix is a bit more complicated. First we need to define covariance. Surprisingly, covariance tells you how two variables vary together. The covariance of two variables can be calculated as: cov(<em>x</em>,<em>y</em>) = E[<em>xy</em>] &#8211; E[<em>x</em>]E[<em>y</em>], where E is expected value, or just mean (so E[<em>x</em>] is the mean of <em>x</em>). A covariance matrix tells us the covariance of corresponding values between two vectors. So the (<em>i</em>,<em>j</em>) element of the covariance matrix between some arbitrary vectors <strong>X</strong> and <strong>Y</strong> tells us the covariance between the <em>i</em>th element of <strong>X</strong> and the <em>j</em>th element of <strong>Y</strong>. As the eigenfaces are the eigenvectors of the covariance matrix, they tell us which points (&#8220;faces&#8221;) in our face space contain the most variance of the dataset. Our covariance matrix can be written as:
+</p>
+<p><img src="emage015.png"/></p>
+<p>where <img src="emage019.png"/>. The <em>T</em> in the superscript above <strong>A</strong> means <strong>transpose</strong>. To take the transpose of a matrix, you just write its columns as rows and vice versa. As expected, <strong>C</strong> is a <img src="emage017.png"/> matrix while <strong>A</strong> is a <img src="emage021.png"/> matrix. Now, we must find the eigenvectors, call them <img src="emage025.png"/>, of <img src="emage023.png"/>. But there&#8217;s a problem&#8230;<img src="emage023.png"/>is a <img src="emage017.png"/> matrix! Imagine if each image was 256&#215;256 pixels &#8211; that would be a 65536&#215;65536 matrix, which we couldn&#8217;t ever hope to calculate the eigenvectors (<img src="emage094.png"/> in number) of in a reasonable time frame. Luckily, we can do a little math to reduce this daunting task. Let&#8217;s look at the matrix <img src="emage027.png"/> (remember, order when multiplying matrices matters). The dimensionality of this matrix is <img src="emage029.png"/>, or the number of training images squared. Say we had 40 training images, that would only be a 40&#215;40 matrix &#8211; much more manageable (only <img src="emage043.png"/> number of eigenvectors)! But aren&#8217;t we looking for the eigenvectors of the covariance matrix, not this weird flip-around thing? Well the thing is, if we can find the eigenvectors of <img src="emage027.png"/>, we can find the eigenvectors of <img src="emage023.png"/>. Check it out:
+</p>
+<p><img src="emage033.png"/></p>
+<p>
+This is just the definition of the eigenvectors, <img src="emage031.png"/>, of <img src="emage027.png"/>. Now, we can multiply both sides of this equation by <strong>A</strong>, which yields:
+</p>
+<p><img src="emage035.png"/></p>
+<p>
+Since <img src="emage023.png"/> is the covariance matrix, we can rewrite this as:
+</p>
+<p><img src="emage037.png"/></p>
+<p>
+Now, remembering our definition of eigenvectors, we can see that <img src="emage041.png"/> are the eigenvectors of <strong>C</strong>. Thus:
+</p>
+<p><img src="emage040.png"/></p>
+<p>
+We now have a formula to calculate <img src="emage025.png"/>. It is important to <strong>normalize</strong> <img src="emage025.png"/> here. What this means is to set the norm of the vector equal to zero: <img src="emage045.png"/>. Setting the norm equal to 1 is equivalent to finding a &#8220;unit vector.&#8221; In this case of a one-dimensional vector, the normalized vector is the vector multiple by the reciprocal of the square root of all the sum of all the elements where each element is squared (this is just the Euclidean norm which can be thought of as a conceptual extension of the Pythagorean theorem). <img src="emage023.png"/> has many more eigenvectors than <img src="emage027.png"/>, but we only need to compute the best (those with the largest eigenvalues) <img src="emage043.png"/> eigenvectors since this contains all the information we need (the corresponding eigenvalues of the rest of the eigenvectors are zero). In practice, often a small amount of the dataset represents most of the variation in it (e.g. a quarter of the set would contain 95% of the total variation). As a result, to further reduce computation, we only keep the first <img src="emage047.png"/> eigenvectors, or eigenfaces as we will now call them. These eigenfaces correspond to a point on the face space &#8211; as a result they are technically &#8220;faces,&#8221; but in practice look really creepily ghost-like, as they aren&#8217;t faces themselves but rather represent the variation of the faces in the dataset. In other words, each face in the dataset can be reconstructed by a linear combination of the eigenfaces.</p>
+<p>
+Now that we know how to calculate eigenfaces, how do we actually pull off face recognition with them? In essence, we project the new face, or test face, in question onto our eigenspace (the subspace of our face space when we trimmed it down in the previous step). We then measure the distance between it and our eigenspace and face classes. Our face classes will be calculated by projecting the test face onto each eigenface. In larger datasets, the face classes can be a subset of images pertaining to a particular person. To begin, we subtract the mean face from the test face:
+</p>
+<p><img src="emage049.png"/></p>
+<p>
+We can now calculate &#8220;weights&#8221; which represent how much each eigenface matters when reconstructing the test face. We project the test face on the eigenspace:
+</p>
+<p><img src="emage051.png"/></p>
+<p>
+where are weights are defined as: <img src="emage053.png"/>. As a result, we can write the test face as a pattern vector:
+</p>
+<p><img src="emage055.png"/></p>
+<p>
+Now we find the minimum distance between the test face and <img src="emage061.png"/> face class:
+</p>
+<p><img src="emage057.png"/></p>
+<p>
+where the second term in the argument is the <img src="emage061.png"/> face class. Now, if our distance within our eigenspace (between the test face and the face class) is below our threshold (<img src="emage059.png"/>), our test face is matched to the <img src="emage061.png"/> face from our training set (this could mean a specific person).
+</p>
+<p>
+Now, there are many kinds of images, so by sheer probability, some image would be close to one of our face classes, even if it is not a face. To prevent, this we also measure the distance between the test face and the eigenspace (to make sure it&#8217;s actually a face, albeit an unknown one). We calculate the distance as:
+</p>
+<p><img src="emage097.png"/></p>
+<p>
+and similarly, if our distance is less than an arbitrary threshold, <img src="emage099.png"/>, the face is detected and classified as an unknown face. Should a test face be far away from the eigenspace, it would be classified as not a face.
+</p>
+<p>
+It might be a little hard to picture what the distances within and from the eigenspace means. Picture the eigenspace as a flat plane and the face classes as circles within that plane. Now image our test face (say a flower) as a point floating high above one of these circles. It is within the enclosure of a face class, which means the eigenface algorithm recognizes it as a face from the training data. However, it&#8217;s a flower so the distance from the eigenspace (it&#8217;s high above the circle) is large, which means despite falling within a face class, it is not a face.
+</p>
+<p>
+That&#8217;s how the basic algorithm works. There&#8217;s some other tips and tricks regarding implementation, such as computational methods to simplify computing the distance from the eigenspace. But this is the eigenface algorithm itself.
+</p>
+<p>
+In regards to artificial neural networks, an implementation could be constructed quite simply. The input layer would be the test face. The weights of between the input layer and the hidden layer would be the eigenfaces we found, so the input to each neuron is a pattern vector. Lastly, the output of the network would be the projection of the test face. This is the most basic neural network implementation and can be expanded with more components (to account for face classes and more).
+</p>
+</p>
+</body>
+</html>

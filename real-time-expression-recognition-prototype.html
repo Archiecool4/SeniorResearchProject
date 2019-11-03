@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Real-Time Expression Recognition Prototype</title>
+<style>
+ul {list-style:none;}
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+</br></br>
+<h3><a href="real-time-expression-recognition-prototype.html">Real-Time Expression Recognition Prototype</a></h3>
+<p size:11px><b>
+<a href="home.html">Archie S.</a> - 
+<time datetime="2018-04-15" pubdate>April 15, 2018 8:00 am</time></b></p>
+<p size:12px>
+<p>
+Hello everyone. It&#8217;s been a long while, and that&#8217;s because I was busy with getting this prototype working. After much trial and error, I finally got something that worked&#8230;sort of. It&#8217;s still a prototype which means its accuracy is not ideal. For example, it has a bit of trouble recognizing the happy expression &#8211; often confusing it with sad. However, it&#8217;s pretty good at classifying the intended neutral and sad expressions correctly.
+</p>
+<p>
+After researching a lot on OpenCV, I learned how to capture video data with it. After that, I had to integrate all my methods from my previous program into the new one. Essentially, the program is analyzing whatever face it sees frame-by-frame. This is a lot of work, however, due to the efficiency of the LBPH method, the computer has no trouble in terms of lag time. Since it takes only a few seconds to create an LBPH face recognizer, I scrapped my initial plan to store the recognizer in data files and have it referred back to whenever needed. Perhaps I will need to do this when I start more rigorous trials with more training data. However, I&#8217;m still only using 9 images for a person (3 neutral, 3 happy, 3 sad).</p>
+<p>Below is a video demonstrating the program from my rather subpar webcam:
+</p>
+<p><video width="500" height="281" controls>
+<source src="video.mp4" type="video/mp4">
+</video>
+</p>
+<p>
+As seen, it&#8217;s not perfect but it&#8217;s definitely on the right track. My future goals in regards to the program are to increase accuracy and design a GUI for easy use.
+</p>
+</p>
+</body>
+</html>
